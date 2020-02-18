@@ -1,3 +1,7 @@
+/**
+ * Funciones de stack
+ * @file
+ */
 # include <math.h>
 #include "stack.h"
 
