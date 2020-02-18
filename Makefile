@@ -1,11 +1,12 @@
+CCP_FLAGS=-Wall -Wpedantic
 is_amstrong_number : main.o doc
-	gcc main.o -o is_armstrong_number -lm 
+	gcc $(CCP_FLAGS) main.o -o is_armstrong_number -lm 
 	echo COMPILACIÓN CORRECTA
 main.o : main.c
-	gcc -c main.c
+	gcc $(CCP_FLAGS) -c main.c
 clean: clean-doc
-	rm main.o is_armstrong_number
-	rm cppcheck.xml
+	rm -rf main.o is_armstrong_number
+	rm -rf cppcheck.xml
 clean-doc:
 	rm -rf html/ latex/
 doc: clean-doc
