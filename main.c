@@ -7,7 +7,6 @@
 # include <math.h>
 # include "amstrong.h"
 
-
 /**
  * Comienzo del proceso 
  * 

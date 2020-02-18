@@ -1,22 +1,23 @@
 CCP_FLAGS=-Wall -Wpedantic
 all: is_amstrong_number
 
-is_amstrong_number : *.o doc
+is_amstrong_number : main.o stack.o amstrong.o doc
 	gcc $(CCP_FLAGS) main.o stack.o amstrong.o -o is_armstrong_number -lm 
 
-main.o : main.c stack.c amstrong.c amstrong.h stack.h
-	gcc $(CCP_FLAGS) -c main.c
-	gcc $(CCP_FLAGS) -c stack.c
-	gcc $(CCP_FLAGS) -c amstrong.c
+%.o: %.c %.h $(DEPS)
+	gcc $(CCP_FLAGS) -c -o $@ $<
 
-clean: clean-doc
+clean: clean-doc clean-test
 	rm -rf main.o stack.o amstrong.o is_armstrong_number
 	rm -rf cppcheck.xml
+	rm -rf test/build/is_amstrong_number
 
 clean-doc:
 	rm -rf html/ latex/
+clean-test:
+	rm -f test/report/*.xml
 
-doc: clean-doc
+doc: clean-doc 
 	doxygen
 
 cppcheck:
@@ -24,3 +25,11 @@ cppcheck:
 
 cppcheck-xml:
 	cppcheck --xml --xml-version=2 . 2> cppcheck.xml
+
+tests: clean amstrong.o stack.o
+	gcc test/amstrong/is_amstrong_number.c amstrong.o stack.o -lm -lcmocka -o test/build/is_amstrong_number
+	CMOCKA_MESSAGE_OUTPUT=stdout CMOCKA_XML_FILE='' ./test/build/is_amstrong_number 
+
+tests-xml: clean amstrong.o stack.o
+	gcc test/amstrong/is_amstrong_number.c amstrong.o stack.o -lm -lcmocka -o test/build/is_amstrong_number
+	CMOCKA_XML_FILE=test/report/%g.xml CMOCKA_MESSAGE_OUTPUT=xml ./test/build/is_amstrong_number 
