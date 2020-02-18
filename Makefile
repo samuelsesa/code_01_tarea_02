@@ -4,3 +4,5 @@ main.o : main.c
 	gcc -c main.c
 clean:
 	rm main.o is_armstrong_number 
+otro:
+	echo hola
