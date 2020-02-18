@@ -5,29 +5,9 @@
 
 # include <stdio.h>
 # include <math.h>
-/*! \def max(a,b)
-    \brief Valor maximo aceptado
-*/
-#define max 10
-/*! \var top
-    \brief Valor maximo aceptado
-*/
-int top=-1;
-/*! \var stack[max]
-    \brief Puntero al último elemento
-*/
-int stack[max];
-/**
- * Añade elemento a stack
- * @param m elemento a almacenar
- */
-void push(int m);
+# include "stack.h"
 
-/**
- * Extrae elemento del stack
- */
-int pop();
-
+extern int top;
 /**
  * Calcula si un número es amstrong o no 
  * @param numb
@@ -72,22 +52,4 @@ int is_armstrong_number(int numb){
 		return 1;   
 	else 
 		return 0;
-}
-
-void push(int m){   
-	top++;   
-	stack[top]=m;
-}
-
-int pop(){   
-  
-	if(top==-1)
-		return(top);   
-	else   
-	{      
-	int j; 
-		j=stack[top];      
-		top--;      
-		return(j);   
-	}
 }
