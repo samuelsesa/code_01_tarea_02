@@ -1,2 +1,4 @@
 *.o
 is_armstrong_number
+latex/
+html/
