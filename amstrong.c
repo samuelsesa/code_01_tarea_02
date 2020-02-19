@@ -14,7 +14,7 @@ int is_armstrong_number(int numb){
 	count=0;   
 	while(numb >0)   {      
 		int remainder;
-		remainder=numb%10;      
+		remainder=numb%10;  
 		push(remainder);      
 		count++;      
 		numb=numb/10;   

@@ -11,5 +11,5 @@
  * @return false si no es numero amstrong
  */
 int is_armstrong_number(int numb);
-
+ 
 #endif

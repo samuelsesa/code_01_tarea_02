@@ -1,19 +1,28 @@
 CC=gcc
 CFLAGS=-Wall -Wpedantic
-LIBS=-lm
-DEPS = stack.h amstrong.h
-OBJ = stack.o amstrong.o
 
-%.o: %.c $(DEPS)
+ODIR=objs
+
+LIBS=-lm
+
+DEPS = stack.h amstrong.h
+#DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+
+_OBJ = stack.o amstrong.o main.o
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+
+
+$(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-is_amstrong_number: $(OBJ) main.o
+is_amstrong_number: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 all: is_amstrong_number
 
 clean: clean-doc clean-test clean-cppcheck
-	rm -rf $(OBJ) is_armstrong_number
+	find . -name "*.o" -exec rm {} \;
+	rm -rf is_amstrong_number
 	rm -rf test/build/is_amstrong_number
 
 clean-doc:
