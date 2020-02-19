@@ -27,7 +27,7 @@ int is_armstrong_number(int numb){
 	}   
 
 	if(value==numb)
-		return 1;   
+		return 0;   
 	else 
-		return 0;
+		return 1;
 }

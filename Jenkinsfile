@@ -4,7 +4,6 @@ pipeline {
 		stage('documentación') {
 			steps {
 				sh 'make doc'
-				sh 'make cppcheck-xml'
 			}
 			post {
 				always {
@@ -15,12 +14,18 @@ pipeline {
 					reportFiles: 'index.html', 
 					reportName: 'Documentación Doxygen', 
 					reportTitles: ''])
-					
-					publishCppcheck pattern: 'cppcheck.xml'
-					
 				}
-
 			}
+		}
+		stage('cppcheck') {
+			steps {
+				sh 'make cppcheck-xml'
+			}			
+			post {
+				always {
+					publishCppcheck pattern: 'cppcheck.xml'
+				}
+			}			
 		}
 	}
 }
