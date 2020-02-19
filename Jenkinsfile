@@ -27,5 +27,23 @@ pipeline {
 				}
 			}			
 		}
+
+		stage('warningcheck') {
+			steps {
+				sh 'make cppcheck-xml'
+			}			
+			post {
+				always {
+					recordIssues qualityGates: [[threshold: 1, 
+							type: 'TOTAL', 
+							unstable: false]], 
+							tools: [gcc()]
+				}
+			}			
+		}		
+
+
+
+
 	}
 }
