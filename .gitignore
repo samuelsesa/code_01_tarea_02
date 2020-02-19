@@ -2,3 +2,5 @@
 is_armstrong_number
 latex/
 html/
+test/build/*
+test/report/is_amstrong_number_tests.xml

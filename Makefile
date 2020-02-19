@@ -8,7 +8,7 @@ is_amstrong_number : main.o stack.o amstrong.o doc
 	gcc $(CCP_FLAGS) -c -o $@ $<
 
 clean: clean-doc clean-test
-	rm -rf main.o stack.o amstrong.o is_armstrong_number
+	rm -rf *.o is_armstrong_number
 	rm -rf cppcheck.xml
 	rm -rf test/build/is_amstrong_number
 
