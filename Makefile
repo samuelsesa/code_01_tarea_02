@@ -1,22 +1,28 @@
-CCP_FLAGS=-Wall -Wpedantic
+CC=gcc
+CFLAGS=-Wall -Wpedantic
+LIBS=-lm
+DEPS = stack.h amstrong.h
+OBJ = stack.o amstrong.o
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+is_amstrong_number: $(OBJ) main.o
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+
 all: is_amstrong_number
 
-is_amstrong_number : main.o stack.o amstrong.o doc
-	gcc $(CCP_FLAGS) main.o stack.o amstrong.o -o is_armstrong_number -lm 
-
-%.o: %.c %.h $(DEPS)
-	gcc $(CCP_FLAGS) -c -o $@ $<
-
-clean: clean-doc clean-test
-	rm -rf *.o is_armstrong_number
-	rm -rf cppcheck.xml
+clean: clean-doc clean-test clean-cppcheck
+	rm -rf $(OBJ) is_armstrong_number
 	rm -rf test/build/is_amstrong_number
 
 clean-doc:
 	rm -rf html/ latex/
 clean-test:
 	rm -f test/report/*.xml
-
+clean-cppcheck:
+	rm -rf cppcheck.xml
+	
 doc: clean-doc 
 	doxygen
 

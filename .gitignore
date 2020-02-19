@@ -1,5 +1,5 @@
 *.o
-is_armstrong_number
+is_amstrong_number
 latex/
 html/
 test/build/*

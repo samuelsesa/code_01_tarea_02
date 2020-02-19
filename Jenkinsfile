@@ -17,6 +17,7 @@ pipeline {
 				}
 			}
 		}
+
 		stage('cppcheck') {
 			steps {
 				sh 'make cppcheck-xml'
@@ -28,16 +29,21 @@ pipeline {
 			}			
 		}
 
-		stage('warningcheck') {
+		stage('build') {
 			steps {
 				sh 'make'
 			}			
 			post {
 				always {
 					recordIssues qualityGates: [[threshold: 1, 
-							type: 'TOTAL', 
-							unstable: false]], 
-							tools: [gcc()]
+						type: 'TOTAL', 
+						unstable: false]], 
+						tools: [gcc()]
+				}
+				success {
+					archiveArtifacts artifacts: 'is_amstrong_number', 
+						fingerprint: true, 
+						onlyIfSuccessful: true
 				}
 			}
 		}
