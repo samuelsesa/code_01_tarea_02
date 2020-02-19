@@ -30,7 +30,7 @@ pipeline {
 
 		stage('warningcheck') {
 			steps {
-				sh 'make cppcheck-xml'
+				sh 'make'
 			}			
 			post {
 				always {
@@ -39,11 +39,7 @@ pipeline {
 							unstable: false]], 
 							tools: [gcc()]
 				}
-			}			
-		}		
-
-
-
-
+			}
+		}
 	}
 }

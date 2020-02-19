@@ -12,7 +12,7 @@
  * 
  * @return false si no es numero amstrong
  */
-int main(){   
+void main(){   
 	int n;   
 	printf("Introduce un número entero");   
 	scanf("%d",&n);   
