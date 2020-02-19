@@ -4,3 +4,4 @@ latex/
 html/
 test/build/*
 test/report/is_amstrong_number_tests.xml
+cppcheck.xml
